@@ -2,7 +2,9 @@
 title: About
 date: '2025-01-10 10:01:10'
 updated: '2025-01-10 10:01:10'
-tags: Mildia Fancia
+tags:
+- Fancia
+- Mildia
 permalink: AllAboutUs/
 description: about
 mathjax: true
