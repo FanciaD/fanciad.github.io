@@ -1,0 +1,10 @@
+darkmode: true
+
+menu:
+  home: / || fa fa-home
+  about: /AllAboutUs/ || fa fa-user
+
+scheme: Mist
+
+cache:
+  enable: true
