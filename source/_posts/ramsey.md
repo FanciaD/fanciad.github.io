@@ -1,7 +1,7 @@
 ---
 title: '[paper] "Should Tables Be Sorted?" and more'
-date: '2023-10-15 17:04:38'
-updated: '2023-10-15 17:04:38'
+date: '2025-04-09 12:03:45'
+updated: '2025-04-09 12:03:45'
 tags:
 - Fancia
 - Mildia
