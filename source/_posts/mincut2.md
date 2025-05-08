@@ -1,5 +1,5 @@
 ---
-title: '[paper] Unirected Mincut'
+title: '[paper] Undirected Mincut'
 date: '2025-04-21 07:13:21'
 updated: '2025-04-21 07:13:21'
 tags: Fancia

@@ -1,14 +1,12 @@
 ---
-title: '[draft] [paper] Undirected Mincut V2'
-date: '2025-05-04 21:54:36'
-updated: '2025-05-04 21:54:36'
+title: '[paper] Undirected Mincut V2'
+date: '2025-05-08 09:03:01'
+updated: '2025-05-08 09:03:01'
 tags: Fancia
 permalink: EveryTimetheSunRises/
 description: Undirected Mincut V2
 mathjax: true
 ---
-
-Disclaimer：还没写完。
 
 考虑到这篇比一晚上速通那篇长了15倍而且难了15倍，写这么慢也是合理的。
 
@@ -168,11 +166,26 @@ $$vol(left side)\geq excess / (\beta-1+O(\log W(G)/h))$$
 
 然后看一下这堆参数：$\beta=200s/\lambda,U=s/2\lambda$——好像不大好。但我们可以更加放缩一下：取 $U=s/2\lambda\cdot O(\tau)$，然后跑 $\tau$ 倍的那么多组东西（限制放到，比如说，$3.9s$）。然后把这 $\tau$ 倍平均掉。此时会有一些割里面的东西跑出来，但是对于每个割，跑出来的都会很少（受到 $3.9$ 影响，所以没事）这样 $\beta$ 不怎么变，但是 $U$ 那边多了一个 $\tau$ 倍，所以 $\beta/U$ 这一项解决了。
 
-但还有第二步——Balanced。回顾上面那个式子，可以看成 excess 除以 $\beta,U$。此时如果 $\beta$ 很大就不行。因此我们继续介绍：
+但还有第二步——Balanced。回顾上面那个式子，可以看成 excess 除以 $\beta,U$。此时如果 $\beta$ 很大就不行。但这里 $\beta$ 高达 $2s$。
 
 ##### Flow Scaling
 
-##### Altogether
+如果我们只放大流量，那很多流量可能直接流不出去，导致割一侧很小。
+
+另一方面，我们可以考虑把 $U$ 也增大很多倍。具体来说，我们考虑用 $2s/\tau\lambda$ 作为流量单位，然后每条边容量是单位乘以边权。这样的话，可以避免一部分上述问题——但还是不行，此时问题是可能初始的流量很少（那是 $W_G/s$ 个 Source），现在同时放缩了边权和 supply，但这样初始流量就只剩 $W_G/s$ 了。
+
+那我们可以再放很多个 Source，放到 $W_G/\tau\lambda$ 级别。这样行了吗？
+
+有一个隐藏的问题：上述证明在大多数时候都管用，但如果流满了，那割甚至就不存在了。这也是为什么上面我们总共放的流量得小于 $W_G$。
+
+那怎么办？我们考虑：
+
+1. 第一层放很多（$O(W_G/\tau\lambda)$）个流的问题，然后它们的流量都很小 $(tau\lambda)$。每一层，每个点的 sink 都是度数。
+2. 流完之后，一个流问题是好的如果它只丢了 $1/poly\log$。然后如果好的问题不超过一半，这一层就可以找到割。
+3. 否则，拿出一半的好的问题，把流量翻倍在下一层继续流，直到结束。
+4. 这样每一层到下一层 $\beta=O(1)$，然后 $U$ 不变，还是 $poly\log$ 啥的。更好的是，每一层挂掉的情况都是这一层上 $excess=O(W_G/...)$。
+
+然后就可以了。最后，我们能做到 $s_0/\lambda=poly\log$。
 
 #### From s-strong to Uncrossing
 
