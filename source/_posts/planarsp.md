@@ -83,3 +83,5 @@ mathjax: true
 如果有负权，就第一个点 BF，后面 Dijk。
 
 这样做两点距离是 $\tilde O(\sqrt n)$ 单次询问（用之前 BF 给的权值）的。
+
+Paper Ref: Planar graphs, negative weight edges, shortest paths, and near linear time

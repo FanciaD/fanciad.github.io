@@ -195,3 +195,4 @@ Note. 对于 Undirected Graph 上面的东西直接就可以了，因为 Karger'
 
 还有一些观察：考虑直接对着 $O(k\log n/\epsilon^2)$ 部分跑网络流会发生啥？一个关键是我们有每个 $s\to i$ 的边，那么只有 $O(k)$ 条边会被填满。所以如果**反过来**跑 Ford-Fulkerson，那么每次走 $O(k)$ 个点之后就会停。那么根据某种意义上的 Local Flow……
 
+Paper Ref: 2111.08959

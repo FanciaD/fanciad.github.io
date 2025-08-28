@@ -137,3 +137,5 @@ Lemma 1. 最大匹配可以 npolylog work, polylog depth.
 考虑套之前的东西，我们需要快速找到一条路径，然后删掉这条路径，还需要树上回溯。
 
 维护动态图连通性，里面上 Top Tree。每一步都可以是高度并行的。 Work 显然是 n polylog。
+
+Paper Ref: 2304.09774

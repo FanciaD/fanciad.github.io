@@ -199,3 +199,5 @@ Note on 参数取值：常见 Expander Decomposition 需要 $1/\phi=n^{o(1)}$（
 
 
 然后把两个构造叠起来。
+
+Paper Ref: 2106.05513

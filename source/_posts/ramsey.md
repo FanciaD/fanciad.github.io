@@ -179,3 +179,5 @@ bool count(int x)
     else return res>n*2-4?1:res%2==0;
 }
 ```
+
+Paper Ref: Should tables be sorted?
