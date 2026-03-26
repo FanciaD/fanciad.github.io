@@ -8,6 +8,8 @@ description: Vertex Cuts
 mathjax: true
 ---
 
+Paper Reference: 2104.00104
+
 ### Vertex Minimum Cut
 
 一个 Vertex Cut 表示删掉一些点，使得剩下部分包含至少有两个连通块。当然有特殊情况（完全图），这里为了简便略过。
@@ -123,5 +125,3 @@ mathjax: true
 2. 中间某一步我们考虑说额外的点都连向了 $N[x]$，所以如果这些点数很多，那 $N[x]$ 里面不可能每个点度数都很少。但现在要分入度出度。我们知道 $L$ 里面的点出度都很少，但这里向 $N[x]$ 连的是入度，所以这不靠谱。
 
 好消息是，剩下的部分都是对的。这包括暴力做每个 Cut，数出度看是否和 Terminal 相邻，Pruning 删点，以及对出边做 Sketching。这样的话每次跑的网络流是 $nl$ 大小而不是 $kl$ 大小。同时 Isolating Cut 那边做不了，所以可以改成暴力做 $n/l$ 次。
-
-Paper Ref: 2104.00104

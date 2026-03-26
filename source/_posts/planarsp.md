@@ -8,6 +8,9 @@ description: Planar SSSP
 mathjax: true
 ---
 
+
+Paper Reference: Planar graphs, negative weight edges, shortest paths, and near linear time
+
 写这个纯粹为了证明自己活着。
 
 虽然感觉活着这样坐牢还不如回去睡觉。
@@ -83,5 +86,3 @@ mathjax: true
 如果有负权，就第一个点 BF，后面 Dijk。
 
 这样做两点距离是 $\tilde O(\sqrt n)$ 单次询问（用之前 BF 给的权值）的。
-
-Paper Ref: Planar graphs, negative weight edges, shortest paths, and near linear time

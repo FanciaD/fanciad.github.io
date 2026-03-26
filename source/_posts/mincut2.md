@@ -8,6 +8,8 @@ description: Undirected Mincut
 mathjax: true
 ---
 
+Paper Reference: 2106.05513
+
 我承认我写得比较急，但这就是科研的样子。之后会慢慢修的。
 
 现在好像一天不做事就像是严重摆过了啥都没干，而且事情也特别多……记得以前我放置都是以周为单位的。
@@ -199,5 +201,3 @@ Note on 参数取值：常见 Expander Decomposition 需要 $1/\phi=n^{o(1)}$（
 
 
 然后把两个构造叠起来。
-
-Paper Ref: 2106.05513

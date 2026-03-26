@@ -8,6 +8,8 @@ description: Weighted Hops — Restricted Shortest Path and Combintorial Flows
 mathjax: true
 ---
 
+Paper Reference: 2410.17179, 2406.03648, 2510.17182.
+
 一定没有写完，但是下次再说。
 
 

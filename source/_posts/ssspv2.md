@@ -8,7 +8,11 @@ description: Negative Weight SSSP
 mathjax: true
 ---
 
+Paper Ref: 2311.02520, 2407.04872, 2506.00428, 2511.12714, 2511.18253.
+
 有人读了我的 {% post_link sssp '上一篇' %} ，觉得写得太过抽象，所以重写一遍。
+
+理论上还应该有下一个版本，但是在路上了。
 
 ### Real Weight SSSP V4
 
