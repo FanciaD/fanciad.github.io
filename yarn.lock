@@ -417,10 +417,10 @@ hasown@^2.0.2:
   dependencies:
     function-bind "^1.1.2"
 
-hexo-asset-link@^2.2.3:
-  version "2.2.3"
-  resolved "https://registry.npmmirror.com/hexo-asset-link/-/hexo-asset-link-2.2.3.tgz"
-  integrity sha512-sCPFeCQ6GelBvxDqJMzS04sigOpW5Dd+oBvFoahHu0MTYSPcI9bXaCnvPd0TZuLHCZK1OSnwZ0q2wdAhlaWbbw==
+hexo-asset-link@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/hexo-asset-link/-/hexo-asset-link-2.3.1.tgz#73de04ceb85a66c1c341877f0c92af8b25ed6795"
+  integrity sha512-vtp7AvGrF3V6lX3+mzkLWKSmmfJ7rcctULOFp0YdTIKoy6xDjSdcDTk0m/XViA3m7FefAL7hIZ5hZn6t9+NdvA==
 
 hexo-cli@^4.3.2:
   version "4.3.2"
