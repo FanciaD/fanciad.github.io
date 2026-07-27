@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fanciad.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="An Ultimate Collection about Path Problems 开点超级大坑，把之前写过的一百个东西合并起来。东西非常多，所以善用目录跳转。 顾名思义，路径问题一般是让你找满足某个条件的最优路径，比如最短路，或者最短瓶颈路（比如MST），等等。 问题本身很简单，但我们有一万个不同的情形。让情况变得更复杂的是，这些情形通常可以 Direct Product 起来：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fancia&#39;s Blog">
+<meta property="og:url" content="https://fanciad.github.io/2026/06/13/pathproblem/index.html">
+<meta property="og:site_name" content="Fancia&#39;s Blog">
+<meta property="og:description" content="An Ultimate Collection about Path Problems 开点超级大坑，把之前写过的一百个东西合并起来。东西非常多，所以善用目录跳转。 顾名思义，路径问题一般是让你找满足某个条件的最优路径，比如最短路，或者最短瓶颈路（比如MST），等等。 问题本身很简单，但我们有一万个不同的情形。让情况变得更复杂的是，这些情形通常可以 Direct Product 起来：">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-13T03:07:58.193Z">
+<meta property="article:modified_time" content="2026-07-27T12:13:59.887Z">
+<meta property="article:author" content="Fancia and her friends">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://fanciad.github.io/2026/06/13/pathproblem/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fanciad.github.io/2026/06/13/pathproblem/","path":"2026/06/13/pathproblem/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Fancia's Blog</title><meta name="robots" content="noindex">
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Fancia's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/AllAboutUs/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#an-ultimate-collection-about-path-problems"><span class="nav-number">1.</span> <span class="nav-text">An Ultimate
+Collection about Path Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#minimum-spanning-tree"><span class="nav-number">1.1.</span> <span class="nav-text">Minimum Spanning Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undirected"><span class="nav-number">1.1.1.</span> <span class="nav-text">Undirected</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#karger-klein-tarjan"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Karger-Klein-Tarjan</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#note-on-tree-rmq"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">Note on Tree RMQ</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#directed"><span class="nav-number">1.1.2.</span> <span class="nav-text">Directed</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#classic-algorithm"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Classic Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#chu-liu-algorithm-edmond-algorithm"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">Chu-Liu Algorithm &#x2F; Edmond
+Algorithm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tarjans-algorithm"><span class="nav-number">1.1.2.1.2.</span> <span class="nav-text">Tarjan&#39;s Algorithm</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bottleneck-paths"><span class="nav-number">1.2.</span> <span class="nav-text">Bottleneck Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#directed-s-t-dividing-the-weights"><span class="nav-number">1.2.1.</span> <span class="nav-text">Directed, s-t: Dividing the
+Weights</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#m-logn-algorithm"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">m log*n Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#median-computation"><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">Median Computation</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#m-betamn-algorithm"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">m beta(m,n) algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#lazy-binary-search"><span class="nav-number">1.2.1.2.1.</span> <span class="nav-text">Lazy Binary Search</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#directed-single-source-more-careful-recursions"><span class="nav-number">1.2.2.</span> <span class="nav-text">Directed,
+Single-Source: More Careful Recursions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#single-source-shortest-paths"><span class="nav-number">1.3.</span> <span class="nav-text">Single-Source Shortest Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#non-negative-undirected-real-weights"><span class="nav-number">1.3.1.</span> <span class="nav-text">Non-negative, Undirected,
+Real Weights</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-negative-directed-real-weights"><span class="nav-number">1.3.2.</span> <span class="nav-text">Non-negative, Directed, Real
+Weights</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#negative-integer-weights---weight-scaling-and-low-diameter-decomposition"><span class="nav-number">1.3.3.</span> <span class="nav-text">Negative,
+Integer Weights - Weight Scaling and Low Diameter Decomposition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#negative-real-weights---the-hard-case"><span class="nav-number">1.3.4.</span> <span class="nav-text">Negative, Real Weights -
+The Hard Case</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#betweenness-remote-sets-and-neutralizaion"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">Betweenness, Remote
+Sets, and Neutralizaion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#betweenness-and-shortcutting"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">Betweenness and Shortcutting</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#planar-shortest-path"><span class="nav-number">1.3.5.</span> <span class="nav-text">Planar Shortest Path</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#restricted-shortest-paths---time-to-approximate"><span class="nav-number">1.4.</span> <span class="nav-text">Restricted
+Shortest Paths - Time to Approximate!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#problems-in-the-parallel-world"><span class="nav-number">1.5.</span> <span class="nav-text">Problems in the Parallel
+World</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#parallel-dfs"><span class="nav-number">1.5.1.</span> <span class="nav-text">Parallel DFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parallel-reachability---introducing-shortcutting"><span class="nav-number">1.5.2.</span> <span class="nav-text">Parallel
+Reachability - Introducing Shortcutting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parallel-dijkstra---growing-near-lists"><span class="nav-number">1.5.3.</span> <span class="nav-text">Parallel Dijkstra -
+Growing Near Lists</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#all-pair-problems---entering-the-fine-grained-realm"><span class="nav-number">1.6.</span> <span class="nav-text">All-Pair
+Problems - Entering the Fine-Grained Realm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dynamic-cases"><span class="nav-number">1.7.</span> <span class="nav-text">Dynamic Cases</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Fancia and her friends</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fanciad.github.io/2026/06/13/pathproblem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Fancia and her friends">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fancia's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Fancia's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-13 11:07:58" itemprop="dateCreated datePublished" datetime="2026-06-13T11:07:58+08:00">2026-06-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-07-27 20:13:59" itemprop="dateModified" datetime="2026-07-27T20:13:59+08:00">2026-07-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="an-ultimate-collection-about-path-problems">An Ultimate
+Collection about Path Problems</h1>
+<p>开点超级大坑，把之前写过的一百个东西合并起来。东西非常多，所以善用目录跳转。</p>
+<p>顾名思义，路径问题一般是让你找满足某个条件的最优路径，比如最短路，或者最短瓶颈路（比如MST），等等。</p>
+<p>问题本身很简单，但我们有一万个不同的情形。让情况变得更复杂的是，这些情形通常可以
+Direct Product 起来：</p>
+<ol type="1">
+<li>无向图 vs 有向图</li>
+<li>非负权图 vs 负权图</li>
+<li>无权 vs 整数边权 vs 实数边权</li>
+<li>s-t vs 单源 vs All-Pair</li>
+<li>正常模型 vs 并行算法 vs 动态插入</li>
+</ol>
+<p>然后情形就变得复杂了起来。这里将会列举一些我读过/做过的东西。</p>
+<h2 id="minimum-spanning-tree">Minimum Spanning Tree</h2>
+<h3 id="undirected">Undirected</h3>
+<p>有经典的 <span class="math inline">\(m\log n\)</span> 算法(Kruskal)
+和经典的 <span class="math inline">\(m+n\log n\)</span>
+算法(Prim+Dijkstra)。</p>
+<p>但还有一个非常震撼的随机线性算法。</p>
+<h4 id="karger-klein-tarjan">Karger-Klein-Tarjan</h4>
+<p>人类智慧时刻：考虑随机一半的边递归求最小生成森林，那么这对剩下一半的边有什么用？</p>
+<p>显然可以做的是，如果求出了前一半的最小生成森林，那么可以把后一半的边放到上面试一次，看是否它们一定没用。</p>
+<p>但这样能干掉多少边呢？可以证明，只会剩下 <span
+class="math inline">\(O(n)\)</span> 条边：</p>
+<blockquote>
+<p>我们从小到大考虑每条边，并考虑递归的生成森林。那么有一半概率递归选了这条边，这样就把生成森林里面这两边连起来了。否则，我们考虑生成森林里面有没有把它们连上，如果没有那后半就会剩下一条边。</p>
+<p>那么每一步，如果这条边的两端已经在里面连通了，那无论怎样都没有影响。否则，有一半概率它合并，另外一半概率答案加一。因此每个有效操作是，一半概率连通块数量减一，一半概率答案加一。容易发现这样高概率只加
+<span class="math inline">\(O(n)\)</span> 次。</p>
+</blockquote>
+<p>那么，右侧递归就只剩下了 <span class="math inline">\(O(n)\)</span>
+条边。那 <span class="math inline">\(n\)</span>
+太大了怎么办？我们需要一些步骤来减少 <span
+class="math inline">\(n\)</span>，因此使用 Boruvka
+算法：考虑对每个点找到其最小出边，那么此边必定在最小生成树中，可以进行合并。这样一轮就会让点数除以
+<span class="math inline">\(2\)</span>。</p>
+<p>这样递归就是 <span
+class="math inline">\(T(m,n)=O(m)+T(m/2,n/2)+T(10n,n/2)\)</span>...
+好像差一点。因此做两轮 Boruvka，把 <span
+class="math inline">\(/2\)</span> 变成 <span
+class="math inline">\(/4\)</span>，然后就是期望线性了。</p>
+<p>缩点步骤可以离线 dfs
+解决。不过有个问题：如何把后一半的边放到前一半的生成森林上去试一下？这相当于树链
+RMQ。这个确实能做，但需要大量数据结构和 Word-RAM 技术......</p>
+<h5 id="note-on-tree-rmq">Note on Tree RMQ</h5>
+<p>以下部分摘抄自《A Simpler Minimum Spanning Tree Verification
+Algorithm》。</p>
+<p>我们对树做一遍
+Boruvka。因为这是棵树，所以是线性的。这个过程中我们可以做一个重构树：每次把一堆点合并起来时，我们加一个点，连向之前的每一个连通块。然后我们希望通过这个过程还原两点间的瓶颈路。首先两点间的路径会形如，每次向上跳到下一个合并的连通块，直到两个点走到一起。考虑在一个连通块内部的过程。因为
+Boruvka
+每个点都是连出去自己最小的出边，有如下结论：内部两个点间的瓶颈路就是起点终点的最小出边的
+<span
+class="math inline">\(\max\)</span>，因为中间的边都是越来越小。那么起点的边我们是直接知道的，但终点咋办？因为你要继续往上走，而从终点继续往上的边权不比它的最小出边少，所以我们不用管这件事。</p>
+<p>因此有如下结论：在 Boruvka
+里面，每次合并一个连通块的时候，我们新建一个点，其向之前的每个连通块连边，边权为这一轮它连出的最小边权。那么，该树上两点的瓶颈路等于原树上两点的瓶颈路。</p>
+<p>但这堆东西有什么用呢？搞了这么多，我们现在把树高变成了 <span
+class="math inline">\(O(\log
+n)\)</span>。这样可以做一些事情。我们先求出每个询问的
+LCA，然后变成直上直下路径的查询。对于每个点，我们记录它子树里面有多少查询会到这个点往上，以及每一种往上走的距离。那么每个点只需要记录
+<span class="math inline">\(O(\log n)\)</span> 个询问的答案。</p>
+<p>假设答案可以 <span class="math inline">\(O(1)\)</span>
+存，那我们每次向下加一个点的时候，只需要二分改一段后缀，然后 Word RAM
+一手就可以 <span class="math inline">\(O(1)\)</span>
+修改。每个点从父亲那里拿答案（有一个序列，我们需要取出它的子集）也可以
+<span class="math inline">\(O(1)\)</span>
+修改。这里全都是四毛子。注意到每个点的复杂度不超过子树大小的 <span
+class="math inline">\(\log\)</span>，所以这是线性的。</p>
+<p>但怎么 <span class="math inline">\(O(1)\)</span>
+存答案呢？注意到答案都是这个点到根的路径上的边权，所以实际上可以 <span
+class="math inline">\(O(\log \log n)\)</span>
+存。满二叉树的情况是简单的：我们只需要记录那条边的深度，然后随便位运算一下就能定位过去。那多叉树怎么办？有一个比上面难了十倍的做法：考虑给叶子递增标号，然后每个中间点的标号是子树内
+lowbit
+最大的叶子，显然这个唯一。然后，注意到对于子树中的其它点，只要给出这个点的
+id 和上面那个点的 lowbit，那我们可以唯一还原出距离这个 id 最近的 lowbit
+是这么多的
+id，然后就找到了上面那个点所在的链。然后我们对于每个叶子，按照深度记录以它为标号的所有边权。这样，只需要记录深度和
+lowbit，我们就可以还原边权。</p>
+<p>然后可以注意到，如果一个点需要记录至少 <span
+class="math inline">\(\log n/\log\log n\)</span>
+种询问，那这样的点一定不多，从而对它们使用 <span
+class="math inline">\(\log\log n\)</span>
+的复杂度维护是可以接受的。但你需要通过一些步骤保证从大的点复制到小的点的时候是
+<span class="math inline">\(O(1)\)</span>
+的。这里做法是，小的点可以维护一些到大的 list 的指针。这个可以通过大
+list 的长度和需要的下标提前预处理，而不需要再看大 list 的内容。</p>
+<p>原论文甚至有详细实现，有兴趣的可以去陶冶情操一下。</p>
+<p>最后是树上 LCA，那按照 OI 惯例先欧拉序转为 +1/-1
+RMQ，然后四毛子，<span class="math inline">\(O(\log n)\)</span>
+分块后块间 ST 表，块内枚举所有情况暴力。</p>
+<h3 id="directed">Directed</h3>
+<h4 id="classic-algorithm">Classic Algorithm</h4>
+<p>Directed
+MST（或者叫做最小树形图）的经典算法不是显而易见的，所以这里先讲一下。</p>
+<p>可以参考 <a href="/Nightingale/" title="CTT2020 自选题题解">OI 教程</a>。</p>
+<h5 id="chu-liu-algorithm-edmond-algorithm">Chu-Liu Algorithm / Edmond
+Algorithm</h5>
+<p>最小树形图相当于，对除去根外每个点选一条出边，使得没有环。（选出边还是入边看问题定义，但是等效）</p>
+<p>我们考虑对每个点找到它的最小出边，那么这构成了一个内向树森林。先考虑只有一棵内向树的情况。如果此时根在这个环上，那么就做完了：把指向环的边删掉，则得到的显然是最小树形图。那如果根在外面呢？可以证明，此时最优解中这个环一定只取了一条向外的出边（从而剩余部分沿着环走）。原因是，如果取了多于一条，那因为环上是最小出边，所以不如把其中的一些接到环上。</p>
+<p>此时可以做如下变换：把环缩成一个点，然后对于这里的每条出边，将其边权加上（环的边权减去环上指向这条边起点的边权），表示选了这条出边就会沿着这里把环上剩下的边选了。那么刚才那样就说明了如果根在外面，那么答案不变；而如果根在里面，那答案就是以缩点后为根的最小树形图，加上环上除去到它的边的边权和。</p>
+<p>一般情况下上述证明也对。然后重复这个过程即可。最后可以通过缩点的过程还原答案。</p>
+<p>直接做是 <span class="math inline">\(O(nm)\)</span>
+的，然后有一个来自 Tarjan 的更快算法：</p>
+<h5 id="tarjans-algorithm">Tarjan's Algorithm</h5>
+<p>考虑从一个点开始
+dfs，每次走最小出边。如果走出了一个环，那就沿用之前的讨论，把环缩成一个点，把出边合并起来，然后继续走。直到把整个图缩成一个点。</p>
+<p>对，这就做完了。复杂度取决于如何合并出边。如果用 OI
+经典的线段树合并，那就是 <span class="math inline">\(O(m\log
+n)\)</span>，但好像也有 <span class="math inline">\(O(m+n\log
+n)\)</span> 的做法。</p>
+<p><del>参考练习：[IOI 2021] Keys, [JOI Open 2019] Virus
+Experiment</del></p>
+<h2 id="bottleneck-paths">Bottleneck Paths</h2>
+<p>找到从 <span class="math inline">\(s\)</span> 到 <span
+class="math inline">\(t\)</span>，最大边权最小的路径。</p>
+<p>无向图的情况抄个无向图 MST 就秒了，所以我们只看有向图。</p>
+<p>有向图的情况显然有 <span class="math inline">\(m+n\log n\)</span> 的
+Dijkstra 类做法。那能不能更好呢？</p>
+<h3 id="directed-s-t-dividing-the-weights">Directed, s-t: Dividing the
+Weights</h3>
+<h4 id="m-logn-algorithm">m log*n Algorithm</h4>
+<p>Gabow, Tarjan，《Algorithms for two bottleneck optimization
+problems》</p>
+<p>我们考虑二分答案。每次我们将当前区间所有边分为 <span
+class="math inline">\(k\)</span>
+份，然后尝试找到答案在哪个区间。每次把边权更大的边删了，边权更小的边当作一直存在。</p>
+<p>如果我们已经将边按照边权从小到大分成了 <span
+class="math inline">\(k\)</span>
+份，那接下来只需要，不断加边，问什么时候 <span
+class="math inline">\(s\)</span> 能到 <span
+class="math inline">\(t\)</span>。那就维护一个
+search，每次加边如果能到新的点就继续搜。显然总复杂度 <span
+class="math inline">\(O(m)\)</span>，那么只需要考虑如何分成 <span
+class="math inline">\(k\)</span> 份，以及需要递归几次。</p>
+<h5 id="median-computation">Median Computation</h5>
+<p>经典算法问题：找中位数 (k-th)。</p>
+<p>把每五个元素分成一组然后排序，每组取出中位数，递归算这 <span
+class="math inline">\(n/5\)</span> 个数的中位数。</p>
+<p>此时，一定有 <span class="math inline">\(3n/10\)</span>
+个数比这个中位数大（<span class="math inline">\(n/10\)</span>
+组，每组三个），也一定有 <span class="math inline">\(3n/10\)</span>
+个比这个小。那么，我们判断一下答案在哪边，然后递归另外 <span
+class="math inline">\(7n/10\)</span> 个。这样 <span
+class="math inline">\(T(n)=O(n)+T(n/5)+T(7n/10)\)</span>。所以是线性。</p>
+<p>图示：标 <span class="math inline">\(b\)</span> 的都比中间大，标
+<span class="math inline">\(s\)</span> 的都比中间小。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">o o o b b b b</span><br><span class="line">| | | | | | |</span><br><span class="line">o o o b b b b</span><br><span class="line">| | | | | | |</span><br><span class="line">s-s-s-x-b-b-b</span><br><span class="line">| | | | | | |</span><br><span class="line">s s s s o o o</span><br><span class="line">| | | | | | |</span><br><span class="line">s s s s o o o</span><br></pre></td></tr></table></figure>
+<p>那么分 <span class="math inline">\(k\)</span> 块的复杂度是 <span
+class="math inline">\(O(m\log k)\)</span>。注意到每一轮后这个 <span
+class="math inline">\(m\)</span> 会除以 <span
+class="math inline">\(k\)</span>，因为这里是当前区间内边数（但搜索还是总边数）。因此，第一轮
+<span class="math inline">\(k\)</span> 是常数，后面每一轮 <span
+class="math inline">\(k\leftarrow 2^k\)</span> 都行。因此复杂度是 <span
+class="math inline">\(O(m\log^* n)\)</span>。</p>
+<h4 id="m-betamn-algorithm">m beta(m,n) algorithm</h4>
+<p>《Bottleneck Paths and Trees and Deterministic Graphical Games》</p>
+<p>能不能不要 <span class="math inline">\(m\log k\)</span>
+呢？考虑直接随机选 <span class="math inline">\(k\)</span>
+个点出来当分界点，那么高概率每一段是 <span class="math inline">\(\frac
+nk\log\)</span>
+的。但问题是，我们不知道别的边都在哪一段。此时怎么求出答案在哪一段呢？我们可以小心一点，就不需要对于每条边都求出它在哪一段，而只做需要的工作。</p>
+<p>之前的问题还有一个做法：我们把边权放到 <span
+class="math inline">\([1,k]\)</span> 的段后，跑一个
+Dijkstra，每次更新下一个瓶颈路最小的点。由于权值只有 <span
+class="math inline">\(1\)</span> 到 <span
+class="math inline">\(k\)</span>，我们开 <span
+class="math inline">\(k\)</span>
+个队列维护，这样就是线性的。现在，我们不再一开始就把边权放到 <span
+class="math inline">\([1,k]\)</span>，而是更新点的权值的时候再看：我们对每个点维护前面到它的最小瓶颈路，然后维护这个值在哪一段里面。每次更新一个点的距离的时候，如果它所在的段变小了，那我们暴力向下枚举。这样更新次数就是
+<span class="math inline">\(m+nk\)</span>。</p>
+<p>那我们第一轮跑 <span
+class="math inline">\(k=m/n\)</span>，后面用之前的方式。这样的话，复杂度是最小的
+<span class="math inline">\(i\)</span> 满足 <span
+class="math inline">\(\log^{(i)} n\le m/n\)</span>。这东西就被叫做 <span
+class="math inline">\(\beta(m,n)\)</span>。注意到 <span
+class="math inline">\(m=n\)</span> 这个就是 <span
+class="math inline">\(\log^* n\)</span>。</p>
+<h5 id="lazy-binary-search">Lazy Binary Search</h5>
+<p>上面还可以做到更好：我们实际上可以做到 <span
+class="math inline">\(m+n\log
+k\)</span>。虽然这样并不能降低这个算法的复杂度。</p>
+<p>实际上如果一个值很大，那我们没必要现在就把它具体在哪一段给求出来，可以等我们到那了，或者等那个值变小了，我们再求。</p>
+<p>比如说，考虑把值分成 <span class="math inline">\(\sqrt k\)</span>
+块，先只更新它在哪个大块内。当我们 Dijkstra
+的距离搜到某个大块时，我们再把在这一块内的那些距离具体地算出来，之后具体地更新这些值。注意到，如果一个点需要被具体更新了，那它的距离最后就在这一块内了，所以每个点只会这样干一次，复杂度就变成了
+<span class="math inline">\(m+n\sqrt k\)</span>。</p>
+<p>然后把这个变成二叉搜索树（或者线段树），每个点表示一段值域，叶子对应那
+<span class="math inline">\(k\)</span>
+段，然后上面每个往下平分。我们记录当前搜到的距离在线段树上的路径。更新一个权值的时候，我们往下走，走到和那个路径分离的子树就停下。然后直到更新了一个比子树更小的权值，或者当前距离到了这个子树再继续。这样不会往上走，所以复杂度是
+<span class="math inline">\(m+n\log k\)</span>。</p>
+<h3 id="directed-single-source-more-careful-recursions">Directed,
+Single-Source: More Careful Recursions</h3>
+<p>和之前的区别在于，如果我们想要对于每个点都求出 <span
+class="math inline">\(s\)</span> 到它的瓶颈路的话，在二分 <span
+class="math inline">\(k\)</span> 段之后，我们就不能只走 <span
+class="math inline">\(t\)</span>
+所在的那一段，而是得每一段都继续递归。这样的挑战是，每一层的问题总大小不会变小，所以即使你
+<span class="math inline">\(n\log k\)</span> 的代价把单个问题大小减小了
+<span class="math inline">\(k\)</span>，那总复杂度还是 <span
+class="math inline">\(n\log n\)</span>，所以这样不行。</p>
+<p>仔细看一下之前的过程。我们访问一个点，枚举它的出边的时候，如果边权在同一段或者更小，那我们直接确定了下一个点也在这一段（如果它还没有被访问），那么可以直接把它拿过来。否则，我们暴力
+<span class="math inline">\(O(\log k)\)</span>
+更新下一个边权。那么，我们需要给一条边 <span class="math inline">\(\log
+k\)</span>
+的代价当且仅当它满足下面这个形式：到这条边起点的瓶颈路小于（在分 <span
+class="math inline">\(k\)</span> 段时）这条边的边权。</p>
+<p>这有什么用呢？考虑分治的步骤。求出从 <span
+class="math inline">\(s\)</span>
+出发，到每一个点的瓶颈路在哪一段后，我们对每一段内的点继续分治。此时，瓶颈路更小的点可以看成直接可达，那么可以把那部分合并到一个点；瓶颈路更大的点一定不可达，那么可以删掉。这样递归时每个点只在一个递归内部。然后可以发现，这一段中边权在更大的段的边也可以直接删掉，因为显然没用。那么，上面我们分析出来需要
+<span class="math inline">\(\log k\)</span>
+代价的边要么是从一个瓶颈路更小的点连到更大的点（不同区间），从而需要被缩起来，要么是一段内一条边权大于这一段的边，从而可以直接删掉。如果我们不考虑缩起来的情况，那就是说每条边只会这样一次，从而总的复杂度就是
+<span class="math inline">\(m\log
+k\)</span>，即使有很多层递归也一样。</p>
+<p>但缩点后跨层的边不会消失，而是会变成递归问题中起点到其它点的边。这一部分还是困难的，如果暴力做这
+<span class="math inline">\(n\)</span> 条边，那就还是 <span
+class="math inline">\(n\log
+k\)</span>，这是不能接受的。怎么处理这些呢？我们可以再次考虑 charge
+到不同层的边上。不妨假设图连通。我们先做权值最小的一段，然后考虑一个已经访问到的点和它的没有被访问的相邻点。此时那个点一定不在这一段，从而我们可以把对起点到这个点的边的
+<span class="math inline">\(\log k\)</span>
+代价统计到已访问点连到这里的边上，这样就把代价摊还掉了。但这样可能中间没访问到的点还有起点到它距离更小的边，所以你得把中间扫一遍，这个
+<span class="math inline">\(n\)</span> 的代价就爆炸了。</p>
+<p>如何避免这个 <span class="math inline">\(n\)</span>
+呢？我们把图分成很多大小 <span class="math inline">\(\log k\)</span>
+的连通块，然后每一块做上面的东西。具体来说，如果我们做某种权值的时候用到了这一块，那我们就去把剩下没有访问的点扫一遍，找到里面起点到它们最小的一条边，<span
+class="math inline">\(\log k\)</span>
+找到这个边权在哪一段，然后把在这一段内的边都拿出来下次用。这整个过程只需要
+<span class="math inline">\(\log
+k\)</span>。注意到每做一次都意味着这一块里面有一种距离，然后因为这是连通块，所以
+<span class="math inline">\(k\)</span> 种距离会有 <span
+class="math inline">\(k-1\)</span>
+条可以统计代价的边，这就没有问题了（预处理是 <span
+class="math inline">\(n/\log k\cdot k\)</span>
+的）。分块可以找个生成树然后树分块。</p>
+<p>这样复杂度是 <span class="math inline">\(m\log
+k\)</span>（递归中删掉的边的代价）加上 <span
+class="math inline">\(m*\log_k m\)</span>（递归深度）。取 <span
+class="math inline">\(k=\exp(\sqrt{\log n})\)</span>，这是 <span
+class="math inline">\(m\sqrt{\log n}\)</span> 的。</p>
+<h2 id="single-source-shortest-paths">Single-Source Shortest Paths</h2>
+<h3 id="non-negative-undirected-real-weights">Non-negative, Undirected,
+Real Weights</h3>
+<p>还没读。</p>
+<h3 id="non-negative-directed-real-weights">Non-negative, Directed, Real
+Weights</h3>
+<p>还没读。</p>
+<h3
+id="negative-integer-weights---weight-scaling-and-low-diameter-decomposition">Negative,
+Integer Weights - Weight Scaling and Low Diameter Decomposition</h3>
+<p>参考资料：<a href="/EbariandtheForest/" title="Low Diameter Decomposition">这里</a></p>
+<h3 id="negative-real-weights---the-hard-case">Negative, Real Weights -
+The Hard Case</h3>
+<h4 id="betweenness-remote-sets-and-neutralizaion">Betweenness, Remote
+Sets, and Neutralizaion</h4>
+<p>完全一致的阅读体验：<a href="/OmBlaSras/" title="[paper] Negative Weight SSSP [Second Edition]">这里</a></p>
+<h4 id="betweenness-and-shortcutting">Betweenness and Shortcutting</h4>
+<p>在路上了。</p>
+<h3 id="planar-shortest-path">Planar Shortest Path</h3>
+<p>差不多的阅读体验：<a href="/Ibara/" title="[paper] Planar SSSP">这里</a></p>
+<h2 id="restricted-shortest-paths---time-to-approximate">Restricted
+Shortest Paths - Time to Approximate!</h2>
+<p>参考资料：<a href="/SongshfHaasheer/" title="Weighted Hops — Restricted Shortest Path and Combintorial Flows">这里</a></p>
+<h2 id="problems-in-the-parallel-world">Problems in the Parallel
+World</h2>
+<h3 id="parallel-dfs">Parallel DFS</h3>
+<p>原版阅读体验：<a href="/KaiyuugyonoGenfuukei/" title="[paper] Parallel DFS">这里</a></p>
+<h3 id="parallel-reachability---introducing-shortcutting">Parallel
+Reachability - Introducing Shortcutting</h3>
+<p>差不多的阅读体验：<a href="/TheButterfly/" title="[paper] Reachability Shortcuts + Approximate Hopset">这里</a></p>
+<p>这是最早 Shortcut
+提出的地方，但因为我按照分类排序的，所以大家可能在上面已经看过什么是
+Shortcutting 了()。</p>
+<h3 id="parallel-dijkstra---growing-near-lists">Parallel Dijkstra -
+Growing Near Lists</h3>
+<p>初代阅读体验：<a href="/SkyofTwilight/" title="[paper] Parallel SSSP">这里</a></p>
+<h2 id="all-pair-problems---entering-the-fine-grained-realm">All-Pair
+Problems - Entering the Fine-Grained Realm</h2>
+<p>其实我不怎么会这个。</p>
+<p>一些参考资料：<a href="/SpinningSugwYarn/" title="Diameter 相关笔记">这里</a></p>
+<h2 id="dynamic-cases">Dynamic Cases</h2>
+<p>这个更是不会。可能是因为 Dynamic Path 太难了。有一些资料可以参考
+<a href="/ForThoseWhoRemain/" title="算法分析与设计2024 笔记">算设课程</a>。</p>
+<!-- flag of hidden posts -->
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Fancia and her friends</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
